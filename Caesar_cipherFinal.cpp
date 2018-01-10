@@ -51,6 +51,7 @@ int ptVal;      //Plain text ASCII value, UpperCase
 int ptValLow;   //Plain text ASCII value, LowerCase
 int ptInt;      //Plain text ASCII value for subtraction of upper and lower case ASCII values to determine position 
 int modVal;
+int j, g;			// control for print out of wrapped around characters
 
 
 int main()
@@ -90,6 +91,7 @@ int main()
 
 			if (0 <= ptVal && ptVal < 26)
 			{
+				j = 0;
 				if (((ptVal + 3) % 25) > 0 && ptVal >= 22)
 				{
 					modVal = ((ptVal + 3) % 25);
@@ -110,19 +112,23 @@ int main()
 					default: break;
 
 					}
+					j++;
 				}
-				cipherUpperVal = ptVal + 3;
-			//	cout << " " << cipherUpperVal;
-				cipherUpperVal = cipherUpperVal + 65;
+				
+				if (j <= 0) {
+					cipherUpperVal = ptVal + 3;
+					//	cout << " " << cipherUpperVal;
+					cipherUpperVal = cipherUpperVal + 65;
 
-				cout << " " << static_cast<char>(cipherUpperVal);
-
+					cout << " " << static_cast<char>(cipherUpperVal);
+				}
 			//	cout << endl;
 			//	cout << "The modulis is: " << modVal << endl;
 			}
 
 			else if (0 <= ptValLow && ptValLow < 26)
 			{
+				g = 0;
 				if (((ptValLow + 3) % 25) > 0 && ptValLow >= 22)
 				{
 					modVal = ((ptValLow + 3) % 25);
@@ -143,16 +149,20 @@ int main()
 					default: break;
 
 					}
+					g++;
 				}
+				if (g <= 0) {
+					cipherLowerVal = ptValLow + 3;
+					//	cout << " " << cipherLowerVal;
+					cipherLowerVal = cipherLowerVal + 97;
+					cout << " " << static_cast<char>(cipherLowerVal);
 
-				cipherLowerVal = ptValLow + 3;
-			//	cout << " " << cipherLowerVal;
-				cipherLowerVal = cipherLowerVal + 97;
-				cout << " " << static_cast<char>(cipherLowerVal);
-
-			//	cout << endl;
-			//	cout << "The modulus is: " << modVal << endl;
+					//	cout << endl;
+					//	cout << "The modulus is: " << modVal << endl;
+				}
 			}
+		
+		
 		}
 		s++;
 	}
